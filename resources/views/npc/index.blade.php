@@ -16,6 +16,7 @@
                 </ul>
             @endif
         </div>
+        {{ $list->links() }}
     </div>
 </div>
 @endsection
