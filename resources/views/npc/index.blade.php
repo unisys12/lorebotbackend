@@ -11,7 +11,7 @@
                 <a href={{ route('npc.create') }} >Enter a New NPC Quote</a>
                 <ul>
                 @foreach ($list as $npc)
-                    <li><b>{{ $npc->name }}</b> - {{ $npc->quote }} - {{ $npc->tags }}</li>
+                    <li><b>{{ $npc->name }}</b> - {{ $npc->quote }} - <i>{{ $npc->tags }}</i> - <a href="npc/{{ $npc->id }}/edit">EDIT</a></li>
                 @endforeach
                 </ul>
             @endif

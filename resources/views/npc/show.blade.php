@@ -3,16 +3,24 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12 col-md-offset-2">
-            @if(count($list) < 1)
-                <p>No NPC's Enter At this time. <a href={{ route('npc.create') }} >Enter an NPC now.</a></p>
-            @else
-                <h1>NPC Quotes</h1>
-                <a href={{ route('npc.create') }} >Enter a New NPC Quote</a>
-                <ul>
-                
-            @endif
-        </div>
+        <form action="/npc/{{ $entry->id }}" method="POST">
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
+
+            <div class="form-group">
+                <label for="name">NPC Name</label>
+                <input type="text" class="form-control" id="new_name" name="name" placeholder="Enter New NPC Name" value="{{ $entry->name }}">
+            </div>
+            <div class="form-group">
+                <label for="quote">NPC Quote</label>
+                <input type="text" class="form-control" id="quote" name="quote" placeholder="Enter New NPC Quote" value="{{ $entry->quote }}">
+            </div>
+            <div class="form-group">
+                <label for="tags">Quote Tags</label>
+                <input type="text" class="form-control" id="tags" name="tags" placeholder="Enter Quote Tags" value="{{ $entry->tags }}">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
     </div>
 </div>
 @endsection

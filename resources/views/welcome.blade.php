@@ -8,7 +8,10 @@
                 <div class="panel-heading">
                     <h3>Welcome to LoreBot 12-86</h3>
                     <div class="panel-body">
-                        <p>Here, you will be able to config a few things pertain to LoreBot functionality. That is after you have passed Rasputins test.</p>
+                        <p>Here, you will be able to configure a few things pertaining to LoreBot's functionality. That is after you have passed Rasputin's test.</p>
+                        <ul>
+                            <li><a href="{{ route('npc.index') }}">NPC Quotes</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

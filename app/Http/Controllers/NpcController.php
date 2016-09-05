@@ -29,7 +29,7 @@ class NpcController extends Controller
      */
     public function index()
     {
-        $list = Npc::all();
+        $list = Npc::paginate(10);
 
         return view('npc/index')->with('list', $list);
     }
@@ -54,22 +54,6 @@ class NpcController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->has('new_name')) {
-            $this->validate($request, [
-                'new_name'  => 'required',
-                'quote'     => 'required',
-                'tags'      => 'required'
-            ]);
-            
-            $npc = new Npc;
-            $npc->name = $request->input('new_name');
-            $npc->quote = $request->input('quote');
-            $npc->tags = $request->input('tags');
-            $npc->save();
-
-            return redirect()->route('npc.index');
-        }
-
         $this->validate($request, [
             'name' => 'required',
             'quote'=> 'required',
@@ -94,7 +78,9 @@ class NpcController extends Controller
      */
     public function show($id)
     {
-        //
+        $entry = Npc::find($id);
+
+        return view('npc/show')->with('entry', $entry);
     }
 
     /**
@@ -105,7 +91,9 @@ class NpcController extends Controller
      */
     public function edit($id)
     {
-        //
+        $entry = Npc::find($id);
+
+        return view('npc/show')->with('entry', $entry);
     }
 
     /**
@@ -117,7 +105,20 @@ class NpcController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $edit = Npc::find($id);
+
+        $this->validate($request, [
+            'name' => 'required',
+            'quote'=> 'required',
+            'tags' => 'required'
+        ]);
+
+        $edit->name = $request->input('name');
+        $edit->quote = $request->input('quote');
+        $edit->tags = $request->input('tags');
+        $edit->save();
+
+        return redirect()->route('npc.index');
     }
 
     /**
