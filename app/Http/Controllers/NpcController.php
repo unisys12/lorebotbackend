@@ -129,6 +129,9 @@ class NpcController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $npc = Npc::find($id);
+        $npc = delete();
+
+        return redirect()->route('npc.index');
     }
 }
