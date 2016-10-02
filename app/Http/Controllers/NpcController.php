@@ -39,10 +39,15 @@ class NpcController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $npcs = DB::table('npcs')->select('name')->distinct()->get();
-        
+
+        /*if ($request->session->exists('same_npc') != NULL) {
+            $npc_name = $request->session->get('same_npc');
+            return view('npc/create')->with('npcs', $npcs)->with('npc_name', $npc_name);
+        }*/
+
         return view('npc/create')->with('npcs', $npcs);
     }
 
@@ -65,9 +70,8 @@ class NpcController extends Controller
         $npc->quote = $request->input('quote');
         $npc->tags = $request->input('tags');
         $npc->save();
-
-        return redirect()->route('npc.index');
-
+        
+        return redirect()->route('npc.create')->withInput($request->except('quote', 'tags'));
     }
 
     /**
@@ -81,6 +85,19 @@ class NpcController extends Controller
         $entry = Npc::find($id);
 
         return view('npc/show')->with('entry', $entry);
+    }
+
+    /**
+     * Display all quotes by single NPC
+     * 
+     * @param string $npc
+     * @return \Illuminate\Http\Response
+     */
+    public function quoteList($npc)
+    {
+        $selection = Npc::find($npc);
+
+        return view('npc/$npc');
     }
 
     /**

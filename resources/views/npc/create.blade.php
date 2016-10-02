@@ -18,8 +18,8 @@
                 <label for="name">NPC Name</label>
                 <select class="form-control" id="name" name="name" onchange="val()">
                     <option value="">Use Only for Selecting an Existing NPC</option>
-                    @foreach($npcs as $npc)                    
-                    <option value="{{ $npc->name }}" name="name">{{ $npc->name }}</option>
+                    @foreach ($npcs as $npc)
+                        <option value="{{ $npc->name }}" name="name">{{ $npc->name }}</option>
                     @endforeach
                 </select>
                 <input type="text" class="form-control" id="new_name" name="name" placeholder="Enter New NPC Name" value="{{ old('name') }}" onchange="val()">
@@ -33,6 +33,8 @@
                 <input type="text" class="form-control" id="tags" name="tags" placeholder="Enter Quote Tags" value="{{ old('tags') }}">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
+            <label for="same_npc">Will your next submission for the same NPC?</label>
+            <input type="checkbox" name="same_npc" id="same_npc" checked>
         </form>
     </div>
 </div>
