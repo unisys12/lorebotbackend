@@ -41,7 +41,7 @@ class NpcController extends Controller
      */
     public function create(Request $request)
     {
-        $npcs = DB::table('npcs')->select('name')->distinct()->get();
+        $npcs = DB::table('npcs')->select('name')->distinct()->orderBy('name')->get();
 
         /*if ($request->session->exists('same_npc') != NULL) {
             $npc_name = $request->session->get('same_npc');
